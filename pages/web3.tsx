@@ -1,8 +1,23 @@
-import { parseEther } from "viem";
-import { Button, message } from "antd";
-import { http, useReadContract, useWriteContract } from "wagmi";
-import { Mainnet, WagmiWeb3ConfigProvider, MetaMask } from '@ant-design/web3-wagmi';
+import { createConfig, http, useReadContract, useWriteContract } from "wagmi";
+import { mainnet, sepolia } from "wagmi/chains";
+import { WagmiWeb3ConfigProvider, MetaMask, Sepolia } from '@ant-design/web3-wagmi';
 import { Address, NFTCard, Connector, ConnectButton, useAccount } from "@ant-design/web3";
+import { injected } from "wagmi/connectors";
+import { Button, message } from "antd";
+import { parseEther } from "viem";
+
+const config = createConfig({
+    chains: [mainnet, sepolia],
+    transports: {
+        [mainnet.id]: http(),
+        [sepolia.id]: http(),
+    },
+    connectors: [
+        injected({
+            target: "metaMask",
+        }),
+    ],
+});
 
 const CallTest = () => {
     const { account } = useAccount();
@@ -11,11 +26,12 @@ const CallTest = () => {
             {
                 type: 'function',
                 name: 'balanceOf',
+                stateMutability: 'view',
                 inputs: [{ name: 'account', type: 'address' }],
                 outputs: [{ type: 'uint256' }],
             },
         ],
-        address: '0xEcd0D12E21805803f70de03B72B1C162dB0898d9',
+        address: '0x0CA8B7d78780408893A1028DD0BE72Fdc57c0024',
         functionName: 'balanceOf',
         args: [account?.address as `0x${string}`],
     });
@@ -44,9 +60,9 @@ const CallTest = () => {
                                     outputs: [],
                                 },
                             ],
-                            address: "0xEcd0D12E21805803f70de03B72B1C162dB0898d9",
+                            address: "0x0CA8B7d78780408893A1028DD0BE72Fdc57c0024",
                             functionName: "mint",
-                            args: [BigInt(1)],
+                            args: [1],
                             value: parseEther("0.01"),
                         },
                         {
@@ -69,10 +85,8 @@ const CallTest = () => {
 export default function Web3() {
     return (
         <WagmiWeb3ConfigProvider
-            chains={[Mainnet]}
-            transports={{
-                [Mainnet.id]: http('https://api.zan.top/node/v1/eth/mainnet/2b7e8989fa1841e99d44b9a9bd6a37b8'),
-            }}
+            config={config}
+            chains={[Sepolia]}
             wallets={[MetaMask()]}
         >
             <Address format address="0xEcd0D12E21805803f70de03B72B1C162dB0898d9" />
