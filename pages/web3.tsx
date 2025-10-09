@@ -7,7 +7,7 @@ export default function Web3() {
         <WagmiWeb3ConfigProvider
             chains={[Mainnet]}
             transports={{
-                [Mainnet.id]: http(),
+                [Mainnet.id]: http('https://api.zan.top/node/v1/eth/mainnet/2b7e8989fa1841e99d44b9a9bd6a37b8'),
             }}
             wallets={[MetaMask()]}
         >
