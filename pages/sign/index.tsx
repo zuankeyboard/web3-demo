@@ -17,6 +17,7 @@ const config = createConfig({
         }),
     ],
 });
+
 const Demo: React.FC = () => {
     return (
         <WagmiWeb3ConfigProvider eip6963 config={config} wallets={[MetaMask()]}>
