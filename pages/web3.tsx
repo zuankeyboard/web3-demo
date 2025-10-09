@@ -1,8 +1,8 @@
 import { createConfig, http, useReadContract, useWriteContract } from "wagmi";
 import { mainnet, sepolia } from "wagmi/chains";
-import { WagmiWeb3ConfigProvider, MetaMask, Sepolia } from '@ant-design/web3-wagmi';
+import { WagmiWeb3ConfigProvider, MetaMask, Sepolia, WalletConnect } from '@ant-design/web3-wagmi';
 import { Address, NFTCard, Connector, ConnectButton, useAccount } from "@ant-design/web3";
-import { injected } from "wagmi/connectors";
+import { injected, walletConnect } from "wagmi/connectors";
 import { Button, message } from "antd";
 import { parseEther } from "viem";
 
@@ -15,6 +15,10 @@ const config = createConfig({
     connectors: [
         injected({
             target: "metaMask",
+        }),
+        walletConnect({
+            projectId: 'c07c0051c2055890eade3556618e38a6',
+            showQrModal: false,
         }),
     ],
 });
@@ -88,6 +92,10 @@ export default function Web3() {
             config={config}
             chains={[Sepolia]}
             wallets={[MetaMask()]}
+            wallets={[MetaMask(), WalletConnect()]}
+            eip6963={{
+                autoAddInjectedWallets: true,
+            }}
         >
             <Address format address="0xEcd0D12E21805803f70de03B72B1C162dB0898d9" />
             <NFTCard
