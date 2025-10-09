@@ -1,16 +1,17 @@
 import { createConfig, http, useReadContract, useWriteContract } from "wagmi";
-import { mainnet, sepolia } from "wagmi/chains";
-import { WagmiWeb3ConfigProvider, MetaMask, Sepolia, WalletConnect } from '@ant-design/web3-wagmi';
-import { Address, NFTCard, Connector, ConnectButton, useAccount } from "@ant-design/web3";
+import { mainnet, sepolia, polygon } from "wagmi/chains";
+import { WagmiWeb3ConfigProvider, MetaMask, Sepolia, WalletConnect, Polygon } from '@ant-design/web3-wagmi';
+import { Address, NFTCard, Connector, ConnectButton, useAccount, useProvider } from "@ant-design/web3";
 import { injected, walletConnect } from "wagmi/connectors";
 import { Button, message } from "antd";
 import { parseEther } from "viem";
 
 const config = createConfig({
-    chains: [mainnet, sepolia],
+    chains: [mainnet, sepolia, polygon],
     transports: {
         [mainnet.id]: http(),
         [sepolia.id]: http(),
+        [polygon.id]: http(),
     },
     connectors: [
         injected({
@@ -23,8 +24,25 @@ const config = createConfig({
     ],
 });
 
+const contractInfo = [
+    {
+        id: 1,
+        name: "Ethereum",
+        contractAddress: "0x0CA8B7d78780408893A1028DD0BE72Fdc57c0024"
+    }, {
+        id: 5,
+        name: "Sepolia",
+        contractAddress: "0x0CA8B7d78780408893A1028DD0BE72Fdc57c0024"
+    }, {
+        id: 137,
+        name: "Polygon",
+        contractAddress: "0x0CA8B7d78780408893A1028DD0BE72Fdc57c0024"
+    }
+]
+
 const CallTest = () => {
     const { account } = useAccount();
+    const { chain } = useProvider();
     const result = useReadContract({
         abi: [
             {
@@ -35,7 +53,7 @@ const CallTest = () => {
                 outputs: [{ type: 'uint256' }],
             },
         ],
-        address: '0x0CA8B7d78780408893A1028DD0BE72Fdc57c0024',
+        address: contractInfo.find((item) => item.id === chain?.id)?.contractAddress as `0x${string}`,
         functionName: 'balanceOf',
         args: [account?.address as `0x${string}`],
     });
@@ -64,7 +82,7 @@ const CallTest = () => {
                                     outputs: [],
                                 },
                             ],
-                            address: "0x0CA8B7d78780408893A1028DD0BE72Fdc57c0024",
+                            address: contractInfo.find((item) => item.id === chain?.id)?.contractAddress as `0x${string}`,
                             functionName: "mint",
                             args: [1],
                             value: parseEther("0.01"),
@@ -90,8 +108,7 @@ export default function Web3() {
     return (
         <WagmiWeb3ConfigProvider
             config={config}
-            chains={[Sepolia]}
-            wallets={[MetaMask()]}
+            chains={[Sepolia, Polygon]}
             wallets={[MetaMask(), WalletConnect()]}
             eip6963={{
                 autoAddInjectedWallets: true,
