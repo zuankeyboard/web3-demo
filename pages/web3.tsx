@@ -1,10 +1,11 @@
-import { createConfig, http, useReadContract, useWriteContract } from "wagmi";
+import { createConfig, http, useWatchContractEvent } from "wagmi";
 import { mainnet, sepolia, polygon, hardhat } from "wagmi/chains";
 import { WagmiWeb3ConfigProvider, MetaMask, Sepolia, WalletConnect, Polygon, Hardhat } from '@ant-design/web3-wagmi';
 import { Address, NFTCard, Connector, ConnectButton, useAccount, useProvider } from "@ant-design/web3";
 import { injected, walletConnect } from "wagmi/connectors";
 import { Button, message } from "antd";
 import { parseEther } from "viem";
+import { useReadMyTokenBalanceOf, useWriteMyTokenMint } from "@/utils/contracts";
 
 const config = createConfig({
     chains: [mainnet, sepolia, polygon, hardhat],
@@ -12,7 +13,7 @@ const config = createConfig({
         [mainnet.id]: http(),
         [sepolia.id]: http(),
         [polygon.id]: http(),
-        [hardhat.id]: http("http://127.0.0.1:8545/"),
+        [hardhat.id]: http("http://127.0.0.1:8546/"),
     },
     connectors: [
         injected({
@@ -49,47 +50,21 @@ const contractInfo = [
 const CallTest = () => {
     const { account } = useAccount();
     const { chain } = useProvider();
-    const result = useReadContract({
-        abi: [
-            {
-                type: 'function',
-                name: 'balanceOf',
-                stateMutability: 'view',
-                inputs: [{ name: 'account', type: 'address' }],
-                outputs: [{ type: 'uint256' }],
-            },
-        ],
+    const result = useReadMyTokenBalanceOf({
         address: contractInfo.find((item) => item.id === chain?.id)?.contractAddress as `0x${string}`,
-        functionName: 'balanceOf',
         args: [account?.address as `0x${string}`],
     });
 
-    const { writeContract } = useWriteContract();
+    const { writeContract: mintNFT } = useWriteMyTokenMint();
 
     return (
         <div>
             {result.data?.toString()}
             <Button
                 onClick={() => {
-                    writeContract(
+                    mintNFT(
                         {
-                            abi: [
-                                {
-                                    type: "function",
-                                    name: "mint",
-                                    stateMutability: "payable",
-                                    inputs: [
-                                        {
-                                            internalType: "uint256",
-                                            name: "quantity",
-                                            type: "uint256",
-                                        },
-                                    ],
-                                    outputs: [],
-                                },
-                            ],
                             address: contractInfo.find((item) => item.id === chain?.id)?.contractAddress as `0x${string}`,
-                            functionName: "mint",
                             args: [BigInt(1)],
                             value: parseEther("0.01"),
                         },
