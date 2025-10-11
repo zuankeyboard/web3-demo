@@ -1,17 +1,18 @@
 import { createConfig, http, useReadContract, useWriteContract } from "wagmi";
-import { mainnet, sepolia, polygon } from "wagmi/chains";
-import { WagmiWeb3ConfigProvider, MetaMask, Sepolia, WalletConnect, Polygon } from '@ant-design/web3-wagmi';
+import { mainnet, sepolia, polygon, hardhat } from "wagmi/chains";
+import { WagmiWeb3ConfigProvider, MetaMask, Sepolia, WalletConnect, Polygon, Hardhat } from '@ant-design/web3-wagmi';
 import { Address, NFTCard, Connector, ConnectButton, useAccount, useProvider } from "@ant-design/web3";
 import { injected, walletConnect } from "wagmi/connectors";
 import { Button, message } from "antd";
 import { parseEther } from "viem";
 
 const config = createConfig({
-    chains: [mainnet, sepolia, polygon],
+    chains: [mainnet, sepolia, polygon, hardhat],
     transports: {
         [mainnet.id]: http(),
         [sepolia.id]: http(),
         [polygon.id]: http(),
+        [hardhat.id]: http("http://127.0.0.1:8545/"),
     },
     connectors: [
         injected({
@@ -37,6 +38,11 @@ const contractInfo = [
         id: 137,
         name: "Polygon",
         contractAddress: "0x0CA8B7d78780408893A1028DD0BE72Fdc57c0024"
+    }, {
+        // id: 31337,
+        id: hardhat.id,
+        name: "Hardhat",
+        contractAddress: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
     }
 ]
 
@@ -84,7 +90,7 @@ const CallTest = () => {
                             ],
                             address: contractInfo.find((item) => item.id === chain?.id)?.contractAddress as `0x${string}`,
                             functionName: "mint",
-                            args: [1],
+                            args: [BigInt(1)],
                             value: parseEther("0.01"),
                         },
                         {
@@ -108,7 +114,7 @@ export default function Web3() {
     return (
         <WagmiWeb3ConfigProvider
             config={config}
-            chains={[Sepolia, Polygon]}
+            chains={[Sepolia, Polygon, Hardhat]}
             wallets={[MetaMask(), WalletConnect()]}
             eip6963={{
                 autoAddInjectedWallets: true,
