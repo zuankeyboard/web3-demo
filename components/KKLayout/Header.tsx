@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ConnectButton } from "@ant-design/web3";
+import { Connector, ConnectButton } from "@ant-design/web3";
 import styles from "./styles.module.css";
 
 export default function KKHeader() {
@@ -23,10 +23,16 @@ export default function KKHeader() {
                 >
                     Pool
                 </Link>
-            </div >
-            <div>
-                <ConnectButton type="text" />
             </div>
-        </div >
+            <div>
+                <Connector
+                    modalProps={{
+                        mode: "simple",
+                    }}
+                >
+                    <ConnectButton type="text" />
+                </Connector>
+            </div>
+        </div>
     );
 }

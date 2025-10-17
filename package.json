@@ -11,13 +11,13 @@
   "dependencies": {
     "@ant-design/web3": "^1.25.1",
     "@ant-design/web3-wagmi": "^2.12.1",
-    "@tanstack/react-query": "^5.90.2",
-    "antd": "^5.27.4",
+    "@tanstack/react-query": "^5.90.5",
+    "antd": "^5.27.5",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "viem": "^2.38.0",
-    "wagmi": "^2.17.5"
+    "viem": "^2.38.3",
+    "wagmi": "^2.18.1"
   },
   "devDependencies": {
     "@types/node": "^20",
