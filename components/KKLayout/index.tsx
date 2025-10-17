@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import styles from "./styles.module.css";
 
 interface KKLayoutProps {
     children: React.ReactNode;
@@ -7,7 +8,7 @@ interface KKLayoutProps {
 
 const KKLayout: React.FC<KKLayoutProps> = ({ children }) => {
     return (
-        <div>
+        <div className={styles.layout}>
             <Header />
             {children}
         </div>
