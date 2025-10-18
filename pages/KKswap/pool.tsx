@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Table, Space, Typography, Button } from "antd";
 import KKLayout from "@/components/KKLayout";
+import AddPoolModal from "@/components/AddPoolModal";
 import Link from "next/link";
 import styles from "./pool.module.css";
 
@@ -58,6 +59,7 @@ const columns: TableProps["columns"] = [
 ];
 
 const PoolListTable: React.FC = () => {
+    const [openAddPoolModal, setOpenAddPoolModal] = React.useState(false);
     const data = [
         {
             token0: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
@@ -72,21 +74,41 @@ const PoolListTable: React.FC = () => {
         },
     ];
     return (
-        <Table
-            title={() => (
-                <Flex justify="space-between">
-                    <div>Pool List</div>
-                    <Space>
-                        <Link href="/KKswap/positions">
-                            <Button>My Positions</Button>
-                        </Link>
-                        <Button type="primary">Add Pool</Button>
-                    </Space>
-                </Flex>
-            )}
-            columns={columns}
-            dataSource={data}
-        />
+        <>
+            <Table
+                rowKey="token0"
+                title={() => (
+                    <Flex justify="space-between">
+                        <div>Pool List</div>
+                        <Space>
+                            <Link href="/KKswap/positions">
+                                <Button>My Positions</Button>
+                            </Link>
+                            <Button
+                                type="primary"
+                                onClick={() => {
+                                    setOpenAddPoolModal(true);
+                                }}
+                            >
+                                Add Pool
+                            </Button>
+                        </Space>
+                    </Flex>
+                )}
+                columns={columns}
+                dataSource={data}
+            />
+            <AddPoolModal
+                open={openAddPoolModal}
+                onCancel={() => {
+                    setOpenAddPoolModal(false);
+                }}
+                onCreatePool={(createPram) => {
+                    console.log("get createPram", createPram);
+                    setOpenAddPoolModal(false);
+                }}
+            />
+        </>
     );
 };
 
