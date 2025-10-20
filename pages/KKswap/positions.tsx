@@ -1,128 +1,186 @@
 import React from "react";
-import { Flex, Table, Space, Typography, Button } from "antd";
+import { Flex, Table, Space, Typography, Button, message } from "antd";
 import type { TableProps } from "antd";
 import KKLayout from "@/components/KKLayout";
 import AddPositionModal from "@/components/AddPositionModal";
 import styles from "./positions.module.css";
 
-const columns: TableProps["columns"] = [
-    {
-        title: "Owner",
-        dataIndex: "owner",
-        key: "owner",
-        ellipsis: true,
-    },
-    {
-        title: "Token 0",
-        dataIndex: "token0",
-        key: "token0",
-        ellipsis: true,
-    },
-    {
-        title: "Token 1",
-        dataIndex: "token1",
-        key: "token1",
-        ellipsis: true,
-    },
-    {
-        title: "Index",
-        dataIndex: "index",
-        key: "index",
-    },
-    {
-        title: "Fee",
-        dataIndex: "fee",
-        key: "fee",
-    },
-    {
-        title: "Liquidity",
-        dataIndex: "liquidity",
-        key: "liquidity",
-        render: (value: bigint) => {
-            return value.toString();
-        },
-    },
-    {
-        title: "Tick Lower",
-        dataIndex: "tickLower",
-        key: "tickLower",
-    },
-    {
-        title: "Tick Upper",
-        dataIndex: "tickUpper",
-        key: "tickUpper",
-    },
-    {
-        title: "Tokens Owed 0",
-        dataIndex: "tokensOwed0",
-        key: "tokensOwed0",
-        render: (value: bigint) => {
-            return value.toString();
-        },
-    },
-    {
-        title: "Tokens Owed 1",
-        dataIndex: "tokensOwed1",
-        key: "tokensOwed1",
-        render: (value: bigint) => {
-            return value.toString();
-        },
-    },
-    {
-        title: "Fee Growth Inside 0",
-        dataIndex: "feeGrowthInside0LastX128",
-        key: "feeGrowthInside0LastX128",
-        render: (value: bigint) => {
-            return value.toString();
-        },
-    },
-    {
-        title: "Fee Growth Inside 1",
-        dataIndex: "feeGrowthInside1LastX128",
-        key: "feeGrowthInside1LastX128",
-        render: (value: bigint) => {
-            return value.toString();
-        },
-    },
-    {
-        title: "Actions",
-        key: "actions",
-        render: () => (
-            <Space className={styles.actions}>
-                <a>Remove</a>
-                <a>Collect</a>
-            </Space>
-        ),
-    },
-];
+import {
+    useWritePositionManagerMint,
+    useWriteErc20Approve,
+    useReadPositionManagerGetAllPositions,
+    useWritePositionManagerBurn,
+    useWritePositionManagerCollect,
+} from "@/utils/contracts";
+import { getContractAddress } from "@/utils/common";
+import { useAccount } from "@ant-design/web3";
 
 const PoolListTable: React.FC = () => {
+    const [loading, setLoading] = React.useState(false);
     const [openAddPositionModal, setOpenAddPositionModal] = React.useState(false);
-    const data = [
+    const { account } = useAccount();
+    const { data = [], refetch } = useReadPositionManagerGetAllPositions({
+        address: getContractAddress("PositionManager"),
+    });
+
+    const { writeContractAsync } = useWritePositionManagerMint();
+    const { writeContractAsync: writeErc20Approve } = useWriteErc20Approve();
+    const { writeContractAsync: writePositionManagerBurn } =
+        useWritePositionManagerBurn();
+    const { writeContractAsync: writePositionManagerCollect } =
+        useWritePositionManagerCollect();
+
+    const columns: TableProps["columns"] = [
         {
-            owner: "0x1234567890abcdef1234567890abcdef12345678",
-            token0: "0x1234567890abcdef1234567890abcdef12345678",
-            token1: "0x1234567890abcdef1234567890abcdef12345678",
-            index: 0,
-            fee: 3000,
-            liquidity: BigInt(1234560000000),
-            tickLower: -123456,
-            tickUpper: 123456,
-            tokensOwed0: BigInt(123456),
-            tokensOwed1: BigInt(654321),
-            feeGrowthInside0LastX128: BigInt(123456),
-            feeGrowthInside1LastX128: BigInt(654321),
+            title: "ID",
+            dataIndex: "id",
+            key: "id",
+            fixed: "left",
+            render: (value: bigint) => {
+                return value.toString();
+            },
+        },
+        {
+            title: "Owner",
+            dataIndex: "owner",
+            key: "owner",
+            fixed: "left",
+            ellipsis: true,
+        },
+        {
+            title: "Token 0",
+            dataIndex: "token0",
+            key: "token0",
+            ellipsis: true,
+        },
+        {
+            title: "Token 1",
+            dataIndex: "token1",
+            key: "token1",
+            ellipsis: true,
+        },
+        {
+            title: "Index",
+            dataIndex: "index",
+            key: "index",
+        },
+        {
+            title: "Fee",
+            dataIndex: "fee",
+            key: "fee",
+        },
+        {
+            title: "Liquidity",
+            dataIndex: "liquidity",
+            key: "liquidity",
+            render: (value: bigint) => {
+                return value.toString();
+            },
+        },
+        {
+            title: "Tick Lower",
+            dataIndex: "tickLower",
+            key: "tickLower",
+        },
+        {
+            title: "Tick Upper",
+            dataIndex: "tickUpper",
+            key: "tickUpper",
+        },
+        {
+            title: "Tokens Owed 0",
+            dataIndex: "tokensOwed0",
+            key: "tokensOwed0",
+            render: (value: bigint) => {
+                return value.toString();
+            },
+        },
+        {
+            title: "Tokens Owed 1",
+            dataIndex: "tokensOwed1",
+            key: "tokensOwed1",
+            render: (value: bigint) => {
+                return value.toString();
+            },
+        },
+        {
+            title: "Fee Growth Inside 0",
+            dataIndex: "feeGrowthInside0LastX128",
+            key: "feeGrowthInside0LastX128",
+            render: (value: bigint) => {
+                return value.toString();
+            },
+        },
+        {
+            title: "Fee Growth Inside 1",
+            dataIndex: "feeGrowthInside1LastX128",
+            key: "feeGrowthInside1LastX128",
+            render: (value: bigint) => {
+                return value.toString();
+            },
+        },
+        {
+            title: "Actions",
+            key: "actions",
+            fixed: "right",
+            render: (_, item) => {
+                if (item.owner !== account?.address) {
+                    return "-";
+                }
+                return (
+                    <Space className={styles.actions}>
+                        {item.liquidity > 0 && (
+                            <a
+                                onClick={async () => {
+                                    try {
+                                        await writePositionManagerBurn({
+                                            address: getContractAddress("PositionManager"),
+                                            args: [item.id],
+                                        });
+                                        refetch();
+                                    } catch (error: any) {
+                                        message.error(error.message);
+                                    }
+                                }}
+                            >
+                                Remove
+                            </a>
+                        )}
+                        {(item.tokensOwed0 > 0 || item.tokensOwed1 > 0) && (
+                            <a
+                                onClick={async () => {
+                                    try {
+                                        await writePositionManagerCollect({
+                                            address: getContractAddress("PositionManager"),
+                                            args: [item.id, account?.address as `0x${string}`],
+                                        });
+                                        refetch();
+                                    } catch (error: any) {
+                                        message.error(error.message);
+                                    }
+                                }}
+                            >
+                                Collect
+                            </a>
+                        )}
+                    </Space>
+                );
+            },
         },
     ];
+
     return (
         <>
             <Table
+                rowKey="id"
+                scroll={{ x: "max-content" }}
                 title={() => (
                     <Flex justify="space-between">
-                        <div>My Positions</div>
+                        <div>Positions</div>
                         <Space>
                             <Button
                                 type="primary"
+                                loading={loading}
                                 onClick={() => {
                                     setOpenAddPositionModal(true);
                                 }}
@@ -140,9 +198,50 @@ const PoolListTable: React.FC = () => {
                 onCancel={() => {
                     setOpenAddPositionModal(false);
                 }}
-                onCreatePosition={(createPram) => {
-                    console.log("get createPram", createPram);
+                onCreatePosition={async (createParams) => {
+                    console.log("get createParams", createParams);
+                    if (account?.address === undefined) {
+                        message.error("Please connect wallet first");
+                        return;
+                    }
                     setOpenAddPositionModal(false);
+                    setLoading(true);
+                    try {
+                        await writeErc20Approve({
+                            address: createParams.token0 as `0x${string}`,
+                            args: [
+                                getContractAddress("PositionManager"),
+                                createParams.amount0Desired as bigint,
+                            ],
+                        });
+                        await writeErc20Approve({
+                            address: createParams.token1 as `0x${string}`,
+                            args: [
+                                getContractAddress("PositionManager"),
+                                createParams.amount1Desired as bigint,
+                            ],
+                        });
+                        await writeContractAsync({
+                            address: getContractAddress("PositionManager"),
+                            args: [
+                                {
+                                    token0: createParams.token0 as `0x${string}`,
+                                    token1: createParams.token1 as `0x${string}`,
+                                    index: createParams.index,
+                                    amount0Desired: createParams.amount0Desired as bigint,
+                                    amount1Desired: createParams.amount1Desired as bigint,
+                                    recipient: account?.address as `0x${string}`,
+                                    deadline: createParams.deadline as bigint,
+                                },
+                            ],
+                        });
+                        message.success("Add Position Success");
+                        refetch();
+                    } catch (error: any) {
+                        message.error(error.message);
+                    } finally {
+                        setLoading(false);
+                    }
                 }}
             />
         </>

@@ -127,12 +127,12 @@ const PoolListTable: React.FC = () => {
                             address: getContractAddress("PoolManager"),
                             args: [
                                 {
-                                    token0: createParams.token0,
-                                    token1: createParams.token1,
+                                    token0: createParams.token0 as `0x${string}`,
+                                    token1: createParams.token1 as `0x${string}`,
                                     fee: createParams.fee,
                                     tickLower: createParams.tickLower,
                                     tickUpper: createParams.tickUpper,
-                                    sqrtPriceX96: createParams.sqrtPriceX96,
+                                    sqrtPriceX96: createParams.sqrtPriceX96 as bigint,
                                 },
                             ],
                         });
