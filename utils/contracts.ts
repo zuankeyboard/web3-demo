@@ -587,6 +587,266 @@ export const erc721Abi = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ERC721Enumerable
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const erc721EnumerableAbi = [
+  { type: 'error', inputs: [], name: 'ERC721EnumerableForbiddenBatchMint' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+      { name: 'owner', internalType: 'address', type: 'address' },
+    ],
+    name: 'ERC721IncorrectOwner',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'operator', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC721InsufficientApproval',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'approver', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidApprover',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'operator', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidOperator',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidOwner',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'receiver', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidReceiver',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'sender', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidSender',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'ERC721NonexistentToken',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'index', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC721OutOfBoundsIndex',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'approved',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'tokenId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'operator',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      { name: 'approved', internalType: 'bool', type: 'bool', indexed: false },
+    ],
+    name: 'ApprovalForAll',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'tokenId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'Transfer',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'getApproved',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'operator', internalType: 'address', type: 'address' },
+    ],
+    name: 'isApprovedForAll',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'ownerOf',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'safeTransferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'safeTransferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'operator', internalType: 'address', type: 'address' },
+      { name: 'approved', internalType: 'bool', type: 'bool' },
+    ],
+    name: 'setApprovalForAll',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'interfaceId', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'supportsInterface',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'index', internalType: 'uint256', type: 'uint256' }],
+    name: 'tokenByIndex',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'index', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'tokenOfOwnerByIndex',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'tokenURI',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Factory
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1162,6 +1422,189 @@ export const ierc721Abi = [
     inputs: [{ name: 'interfaceId', internalType: 'bytes4', type: 'bytes4' }],
     name: 'supportsInterface',
     outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IERC721Enumerable
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const ierc721EnumerableAbi = [
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'approved',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'tokenId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'operator',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      { name: 'approved', internalType: 'bool', type: 'bool', indexed: false },
+    ],
+    name: 'ApprovalForAll',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'tokenId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'Transfer',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: 'balance', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'getApproved',
+    outputs: [{ name: 'operator', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'operator', internalType: 'address', type: 'address' },
+    ],
+    name: 'isApprovedForAll',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'ownerOf',
+    outputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'safeTransferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'safeTransferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'operator', internalType: 'address', type: 'address' },
+      { name: 'approved', internalType: 'bool', type: 'bool' },
+    ],
+    name: 'setApprovalForAll',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'interfaceId', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'supportsInterface',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'index', internalType: 'uint256', type: 'uint256' }],
+    name: 'tokenByIndex',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'index', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'tokenOfOwnerByIndex',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
@@ -2421,6 +2864,431 @@ export const iSwapRouterAbi = [
       { name: 'data', internalType: 'bytes', type: 'bytes' },
     ],
     name: 'swapCallback',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// KKNFT
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const kknftAbi = [
+  {
+    type: 'constructor',
+    inputs: [
+      { name: 'name', internalType: 'string', type: 'string' },
+      { name: 'symbol', internalType: 'string', type: 'string' },
+      { name: 'baseURI', internalType: 'string', type: 'string' },
+      { name: 'maxSupply', internalType: 'uint256', type: 'uint256' },
+      { name: 'mintPrice', internalType: 'uint256', type: 'uint256' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  { type: 'error', inputs: [], name: 'ERC721EnumerableForbiddenBatchMint' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+      { name: 'owner', internalType: 'address', type: 'address' },
+    ],
+    name: 'ERC721IncorrectOwner',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'operator', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC721InsufficientApproval',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'approver', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidApprover',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'operator', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidOperator',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidOwner',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'receiver', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidReceiver',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'sender', internalType: 'address', type: 'address' }],
+    name: 'ERC721InvalidSender',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'ERC721NonexistentToken',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'index', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC721OutOfBoundsIndex',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'OwnableInvalidOwner',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'OwnableUnauthorizedAccount',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'approved',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'tokenId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'operator',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      { name: 'approved', internalType: 'bool', type: 'bool', indexed: false },
+    ],
+    name: 'ApprovalForAll',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'previousOwner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'newOwner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'OwnershipTransferred',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'tokenId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+    ],
+    name: 'Transfer',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'getApproved',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getBaseURI',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getContractBalance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'creator', internalType: 'address', type: 'address' }],
+    name: 'getCreatorRoyalty',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getMaxSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getMintPrice',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'getTokenExists',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'getTokenMetadata',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    name: 'getTokensOfOwner',
+    outputs: [{ name: '', internalType: 'uint256[]', type: 'uint256[]' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'operator', internalType: 'address', type: 'address' },
+    ],
+    name: 'isApprovedForAll',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'to', internalType: 'address', type: 'address' }],
+    name: 'mint',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'payable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'owner',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'ownerOf',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'renounceOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'safeTransferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+      { name: 'data', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'safeTransferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'operator', internalType: 'address', type: 'address' },
+      { name: 'approved', internalType: 'bool', type: 'bool' },
+    ],
+    name: 'setApprovalForAll',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'baseURI', internalType: 'string', type: 'string' }],
+    name: 'setBaseURI',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'creator', internalType: 'address', type: 'address' },
+      { name: 'royaltyPercentage', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'setCreatorRoyalty',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'price', internalType: 'uint256', type: 'uint256' }],
+    name: 'setMintPrice',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+      { name: 'metadata', internalType: 'string', type: 'string' },
+    ],
+    name: 'setTokenMetadata',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'interfaceId', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'supportsInterface',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'index', internalType: 'uint256', type: 'uint256' }],
+    name: 'tokenByIndex',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'index', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'tokenOfOwnerByIndex',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
+    name: 'tokenURI',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'tokenId', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'newOwner', internalType: 'address', type: 'address' }],
+    name: 'transferOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'withdraw',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -4741,6 +5609,229 @@ export const useWatchErc721TransferEvent =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__
+ */
+export const useReadErc721Enumerable = /*#__PURE__*/ createUseReadContract({
+  abi: erc721EnumerableAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadErc721EnumerableBalanceOf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'balanceOf',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"getApproved"`
+ */
+export const useReadErc721EnumerableGetApproved =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'getApproved',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"isApprovedForAll"`
+ */
+export const useReadErc721EnumerableIsApprovedForAll =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'isApprovedForAll',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"name"`
+ */
+export const useReadErc721EnumerableName = /*#__PURE__*/ createUseReadContract({
+  abi: erc721EnumerableAbi,
+  functionName: 'name',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"ownerOf"`
+ */
+export const useReadErc721EnumerableOwnerOf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'ownerOf',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"supportsInterface"`
+ */
+export const useReadErc721EnumerableSupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'supportsInterface',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"symbol"`
+ */
+export const useReadErc721EnumerableSymbol =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'symbol',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"tokenByIndex"`
+ */
+export const useReadErc721EnumerableTokenByIndex =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'tokenByIndex',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"tokenOfOwnerByIndex"`
+ */
+export const useReadErc721EnumerableTokenOfOwnerByIndex =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'tokenOfOwnerByIndex',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"tokenURI"`
+ */
+export const useReadErc721EnumerableTokenUri =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'tokenURI',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadErc721EnumerableTotalSupply =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'totalSupply',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc721EnumerableAbi}__
+ */
+export const useWriteErc721Enumerable = /*#__PURE__*/ createUseWriteContract({
+  abi: erc721EnumerableAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteErc721EnumerableApprove =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"safeTransferFrom"`
+ */
+export const useWriteErc721EnumerableSafeTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'safeTransferFrom',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"setApprovalForAll"`
+ */
+export const useWriteErc721EnumerableSetApprovalForAll =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'setApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteErc721EnumerableTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc721EnumerableAbi}__
+ */
+export const useSimulateErc721Enumerable =
+  /*#__PURE__*/ createUseSimulateContract({ abi: erc721EnumerableAbi })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateErc721EnumerableApprove =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"safeTransferFrom"`
+ */
+export const useSimulateErc721EnumerableSafeTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'safeTransferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"setApprovalForAll"`
+ */
+export const useSimulateErc721EnumerableSetApprovalForAll =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'setApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateErc721EnumerableTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc721EnumerableAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc721EnumerableAbi}__
+ */
+export const useWatchErc721EnumerableEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: erc721EnumerableAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchErc721EnumerableApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc721EnumerableAbi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `eventName` set to `"ApprovalForAll"`
+ */
+export const useWatchErc721EnumerableApprovalForAllEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc721EnumerableAbi,
+    eventName: 'ApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc721EnumerableAbi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchErc721EnumerableTransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc721EnumerableAbi,
+    eventName: 'Transfer',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link factoryAbi}__
  */
 export const useReadFactory = /*#__PURE__*/ createUseReadContract({
@@ -5266,6 +6357,203 @@ export const useWatchIerc721ApprovalForAllEvent =
 export const useWatchIerc721TransferEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: ierc721Abi,
+    eventName: 'Transfer',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__
+ */
+export const useReadIerc721Enumerable = /*#__PURE__*/ createUseReadContract({
+  abi: ierc721EnumerableAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadIerc721EnumerableBalanceOf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'balanceOf',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"getApproved"`
+ */
+export const useReadIerc721EnumerableGetApproved =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'getApproved',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"isApprovedForAll"`
+ */
+export const useReadIerc721EnumerableIsApprovedForAll =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'isApprovedForAll',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"ownerOf"`
+ */
+export const useReadIerc721EnumerableOwnerOf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'ownerOf',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"supportsInterface"`
+ */
+export const useReadIerc721EnumerableSupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'supportsInterface',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"tokenByIndex"`
+ */
+export const useReadIerc721EnumerableTokenByIndex =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'tokenByIndex',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"tokenOfOwnerByIndex"`
+ */
+export const useReadIerc721EnumerableTokenOfOwnerByIndex =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'tokenOfOwnerByIndex',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadIerc721EnumerableTotalSupply =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'totalSupply',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__
+ */
+export const useWriteIerc721Enumerable = /*#__PURE__*/ createUseWriteContract({
+  abi: ierc721EnumerableAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteIerc721EnumerableApprove =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"safeTransferFrom"`
+ */
+export const useWriteIerc721EnumerableSafeTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'safeTransferFrom',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"setApprovalForAll"`
+ */
+export const useWriteIerc721EnumerableSetApprovalForAll =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'setApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteIerc721EnumerableTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__
+ */
+export const useSimulateIerc721Enumerable =
+  /*#__PURE__*/ createUseSimulateContract({ abi: ierc721EnumerableAbi })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateIerc721EnumerableApprove =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"safeTransferFrom"`
+ */
+export const useSimulateIerc721EnumerableSafeTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'safeTransferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"setApprovalForAll"`
+ */
+export const useSimulateIerc721EnumerableSetApprovalForAll =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'setApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateIerc721EnumerableTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc721EnumerableAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc721EnumerableAbi}__
+ */
+export const useWatchIerc721EnumerableEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: ierc721EnumerableAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchIerc721EnumerableApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc721EnumerableAbi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `eventName` set to `"ApprovalForAll"`
+ */
+export const useWatchIerc721EnumerableApprovalForAllEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc721EnumerableAbi,
+    eventName: 'ApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc721EnumerableAbi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchIerc721EnumerableTransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc721EnumerableAbi,
     eventName: 'Transfer',
   })
 
@@ -6339,6 +7627,437 @@ export const useWatchISwapRouterSwapEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: iSwapRouterAbi,
     eventName: 'Swap',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__
+ */
+export const useReadKknft = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadKknftBalanceOf = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'balanceOf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getApproved"`
+ */
+export const useReadKknftGetApproved = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'getApproved',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getBaseURI"`
+ */
+export const useReadKknftGetBaseUri = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'getBaseURI',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getContractBalance"`
+ */
+export const useReadKknftGetContractBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: kknftAbi,
+    functionName: 'getContractBalance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getCreatorRoyalty"`
+ */
+export const useReadKknftGetCreatorRoyalty =
+  /*#__PURE__*/ createUseReadContract({
+    abi: kknftAbi,
+    functionName: 'getCreatorRoyalty',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getMaxSupply"`
+ */
+export const useReadKknftGetMaxSupply = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'getMaxSupply',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getMintPrice"`
+ */
+export const useReadKknftGetMintPrice = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'getMintPrice',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getTokenExists"`
+ */
+export const useReadKknftGetTokenExists = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'getTokenExists',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getTokenMetadata"`
+ */
+export const useReadKknftGetTokenMetadata = /*#__PURE__*/ createUseReadContract(
+  { abi: kknftAbi, functionName: 'getTokenMetadata' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"getTokensOfOwner"`
+ */
+export const useReadKknftGetTokensOfOwner = /*#__PURE__*/ createUseReadContract(
+  { abi: kknftAbi, functionName: 'getTokensOfOwner' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"isApprovedForAll"`
+ */
+export const useReadKknftIsApprovedForAll = /*#__PURE__*/ createUseReadContract(
+  { abi: kknftAbi, functionName: 'isApprovedForAll' },
+)
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"name"`
+ */
+export const useReadKknftName = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'name',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"owner"`
+ */
+export const useReadKknftOwner = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'owner',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"ownerOf"`
+ */
+export const useReadKknftOwnerOf = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'ownerOf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"supportsInterface"`
+ */
+export const useReadKknftSupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: kknftAbi,
+    functionName: 'supportsInterface',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"symbol"`
+ */
+export const useReadKknftSymbol = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'symbol',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"tokenByIndex"`
+ */
+export const useReadKknftTokenByIndex = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'tokenByIndex',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"tokenOfOwnerByIndex"`
+ */
+export const useReadKknftTokenOfOwnerByIndex =
+  /*#__PURE__*/ createUseReadContract({
+    abi: kknftAbi,
+    functionName: 'tokenOfOwnerByIndex',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"tokenURI"`
+ */
+export const useReadKknftTokenUri = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'tokenURI',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadKknftTotalSupply = /*#__PURE__*/ createUseReadContract({
+  abi: kknftAbi,
+  functionName: 'totalSupply',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__
+ */
+export const useWriteKknft = /*#__PURE__*/ createUseWriteContract({
+  abi: kknftAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteKknftApprove = /*#__PURE__*/ createUseWriteContract({
+  abi: kknftAbi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"mint"`
+ */
+export const useWriteKknftMint = /*#__PURE__*/ createUseWriteContract({
+  abi: kknftAbi,
+  functionName: 'mint',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"renounceOwnership"`
+ */
+export const useWriteKknftRenounceOwnership =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: kknftAbi,
+    functionName: 'renounceOwnership',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"safeTransferFrom"`
+ */
+export const useWriteKknftSafeTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: kknftAbi,
+    functionName: 'safeTransferFrom',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setApprovalForAll"`
+ */
+export const useWriteKknftSetApprovalForAll =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: kknftAbi,
+    functionName: 'setApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setBaseURI"`
+ */
+export const useWriteKknftSetBaseUri = /*#__PURE__*/ createUseWriteContract({
+  abi: kknftAbi,
+  functionName: 'setBaseURI',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setCreatorRoyalty"`
+ */
+export const useWriteKknftSetCreatorRoyalty =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: kknftAbi,
+    functionName: 'setCreatorRoyalty',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setMintPrice"`
+ */
+export const useWriteKknftSetMintPrice = /*#__PURE__*/ createUseWriteContract({
+  abi: kknftAbi,
+  functionName: 'setMintPrice',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setTokenMetadata"`
+ */
+export const useWriteKknftSetTokenMetadata =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: kknftAbi,
+    functionName: 'setTokenMetadata',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteKknftTransferFrom = /*#__PURE__*/ createUseWriteContract({
+  abi: kknftAbi,
+  functionName: 'transferFrom',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"transferOwnership"`
+ */
+export const useWriteKknftTransferOwnership =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: kknftAbi,
+    functionName: 'transferOwnership',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"withdraw"`
+ */
+export const useWriteKknftWithdraw = /*#__PURE__*/ createUseWriteContract({
+  abi: kknftAbi,
+  functionName: 'withdraw',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__
+ */
+export const useSimulateKknft = /*#__PURE__*/ createUseSimulateContract({
+  abi: kknftAbi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateKknftApprove = /*#__PURE__*/ createUseSimulateContract({
+  abi: kknftAbi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"mint"`
+ */
+export const useSimulateKknftMint = /*#__PURE__*/ createUseSimulateContract({
+  abi: kknftAbi,
+  functionName: 'mint',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"renounceOwnership"`
+ */
+export const useSimulateKknftRenounceOwnership =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'renounceOwnership',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"safeTransferFrom"`
+ */
+export const useSimulateKknftSafeTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'safeTransferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setApprovalForAll"`
+ */
+export const useSimulateKknftSetApprovalForAll =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'setApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setBaseURI"`
+ */
+export const useSimulateKknftSetBaseUri =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'setBaseURI',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setCreatorRoyalty"`
+ */
+export const useSimulateKknftSetCreatorRoyalty =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'setCreatorRoyalty',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setMintPrice"`
+ */
+export const useSimulateKknftSetMintPrice =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'setMintPrice',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"setTokenMetadata"`
+ */
+export const useSimulateKknftSetTokenMetadata =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'setTokenMetadata',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateKknftTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"transferOwnership"`
+ */
+export const useSimulateKknftTransferOwnership =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: kknftAbi,
+    functionName: 'transferOwnership',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link kknftAbi}__ and `functionName` set to `"withdraw"`
+ */
+export const useSimulateKknftWithdraw = /*#__PURE__*/ createUseSimulateContract(
+  { abi: kknftAbi, functionName: 'withdraw' },
+)
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link kknftAbi}__
+ */
+export const useWatchKknftEvent = /*#__PURE__*/ createUseWatchContractEvent({
+  abi: kknftAbi,
+})
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link kknftAbi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchKknftApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: kknftAbi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link kknftAbi}__ and `eventName` set to `"ApprovalForAll"`
+ */
+export const useWatchKknftApprovalForAllEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: kknftAbi,
+    eventName: 'ApprovalForAll',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link kknftAbi}__ and `eventName` set to `"OwnershipTransferred"`
+ */
+export const useWatchKknftOwnershipTransferredEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: kknftAbi,
+    eventName: 'OwnershipTransferred',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link kknftAbi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchKknftTransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: kknftAbi,
+    eventName: 'Transfer',
   })
 
 /**
