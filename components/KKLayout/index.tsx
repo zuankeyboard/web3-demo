@@ -8,7 +8,7 @@ import {
     WagmiWeb3ConfigProvider,
     WalletConnect,
     Hardhat,
-    Mainnet,
+    Sepolia,
 } from "@ant-design/web3-wagmi";
 
 interface KKLayoutProps {
@@ -22,7 +22,11 @@ const KKLayout: React.FC<KKLayoutProps> = ({ children }) => {
                 autoAddInjectedWallets: true,
             }}
             ens
-            chains={[Mainnet, Hardhat]}
+            chains={[Sepolia, Hardhat]}
+            transports={{
+                [Hardhat.id]: http("http://127.0.0.1:8545"),
+                [Sepolia.id]: http("https://api.zan.top/public/eth-sepolia"),
+            }}
             wallets={[
                 MetaMask(),
                 WalletConnect(),
