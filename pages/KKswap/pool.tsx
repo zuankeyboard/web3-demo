@@ -135,6 +135,8 @@ const PoolListTable: React.FC = () => {
                                     sqrtPriceX96: createParams.sqrtPriceX96 as bigint,
                                 },
                             ],
+                            // 设置gas限制在Sepolia网络允许的范围内
+                            gas: BigInt(16000000),
                         });
                         message.success("Create Pool Success If Necessary");
                         refetch();

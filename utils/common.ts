@@ -88,7 +88,7 @@ const builtInTokens: Record<string, Token> = {
             },
         ],
     },
-    "0x5AAB2806D12E380c24C640a8Cd94906d7fA59b16": {
+    "0x4E8E3Da8B71AA27DD39ba8eB38fE76F90430CcAd": {
         icon: null,
         symbol: "DTA",
         decimal: 18,
@@ -96,11 +96,11 @@ const builtInTokens: Record<string, Token> = {
         availableChains: [
             {
                 chain: Sepolia,
-                contract: "0x5AAB2806D12E380c24C640a8Cd94906d7fA59b16",
+                contract: "0x4E8E3Da8B71AA27DD39ba8eB38fE76F90430CcAd",
             },
         ],
     },
-    "0x00E6EC12a0Fc35d7064cD0d551Ac74A02bA8a5A5": {
+    "0x3EB9823f21E3f1307A3eAf7f3897b16C2cAf66e1": {
         icon: null,
         symbol: "DTB",
         decimal: 18,
@@ -108,11 +108,11 @@ const builtInTokens: Record<string, Token> = {
         availableChains: [
             {
                 chain: Sepolia,
-                contract: "0x00E6EC12a0Fc35d7064cD0d551Ac74A02bA8a5A5",
+                contract: "0x3EB9823f21E3f1307A3eAf7f3897b16C2cAf66e1",
             },
         ],
     },
-    "0x1D46AD43cc80BFb66C1D574d2B0E4abab191d1E0": {
+    "0x8eFaBDfaE42e494582469a108Abf540819fcBb33": {
         icon: null,
         symbol: "DTC",
         decimal: 18,
@@ -120,7 +120,7 @@ const builtInTokens: Record<string, Token> = {
         availableChains: [
             {
                 chain: Sepolia,
-                contract: "0x1D46AD43cc80BFb66C1D574d2B0E4abab191d1E0",
+                contract: "0x8eFaBDfaE42e494582469a108Abf540819fcBb33",
             },
         ],
     },
