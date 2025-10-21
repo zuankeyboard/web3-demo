@@ -12,7 +12,7 @@ const SignDemo: React.FC = () => {
         setSignLoading(true);
         try {
             const signature = await signMessageAsync({
-                message: "test message for WTF-DApp demo",
+                message: "test message for KK-DApp demo",
             });
             await checkSignature({
                 address: account?.address,
@@ -24,7 +24,6 @@ const SignDemo: React.FC = () => {
         setSignLoading(false);
     };
 
-    // checkSignature here
     const checkSignature = async (params: {
         address?: string;
         signature: string;
@@ -59,8 +58,6 @@ const SignDemo: React.FC = () => {
                 Sign message
             </Button>
         </Space>
-
     );
 };
-
 export default SignDemo;

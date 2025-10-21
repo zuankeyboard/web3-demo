@@ -16,7 +16,7 @@ export default async function handler(
         const body = req.body;
         const valid = await publicClient.verifyMessage({
             address: body.address,
-            message: "test message for WTF-DApp demo",
+            message: "test message for KK-DApp demo",
             signature: body.signature,
         });
         res.status(200).json({ data: valid });

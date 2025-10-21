@@ -1,13 +1,13 @@
-import { Modal, Form, Input, InputNumber, Select } from "antd";
-import { parsePriceToSqrtPriceX96 } from "@/utils/common";
+import { Modal, Form, Input, InputNumber, Select, message } from "antd";
+import { parsePriceToSqrtPriceX96, getContractAddress } from "@/utils/common";
 
 interface CreatePoolParams {
-    token0: string;
-    token1: string;
+    token0: `0x${string}`;
+    token1: `0x${string}`;
     fee: number;
     tickLower: number;
     tickUpper: number;
-    sqrtPriceX96: BigInt;
+    sqrtPriceX96: bigint;
 }
 
 interface AddPoolModalProps {
@@ -26,8 +26,12 @@ export default function AddPoolModal(props: AddPoolModalProps) {
             open={open}
             onCancel={onCancel}
             okText="Create"
-            onOk={() => {
-                form.validateFields().then((values) => {
+            onOk={async () => {
+                const values = await form.validateFields().then((values) => {
+                    if (values.token0 >= values.token1) {
+                        message.error("Token0 should be less than Token1");
+                        return false;
+                    }
                     onCreatePool({
                         ...values,
                         sqrtPriceX96: parsePriceToSqrtPriceX96(values.price),
@@ -35,7 +39,18 @@ export default function AddPoolModal(props: AddPoolModalProps) {
                 });
             }}
         >
-            <Form layout="vertical" form={form}>
+            <Form
+                layout="vertical"
+                form={form}
+                initialValues={{
+                    token0: getContractAddress("DebugTokenA"),
+                    token1: getContractAddress("DebugTokenB"),
+                    fee: 3000,
+                    tickLower: -887272,
+                    tickUpper: 887272,
+                    price: 1,
+                }}
+            >
                 <Form.Item required label="Token 0" name="token0">
                     <Input />
                 </Form.Item>
